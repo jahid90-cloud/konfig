@@ -12,9 +12,16 @@ type httpServer struct {
 }
 
 func NewServer() *httpServer {
+
+	engine := gin.New()
+	config := config.NewConfig()
+
+	// Remove when used behind a proxy
+	engine.SetTrustedProxies(nil)
+
 	server := &httpServer{
-		router: gin.New(),
-		config: config.NewConfig(),
+		router: engine,
+		config: config,
 	}
 
 	server.mountMiddlewares()
@@ -39,7 +46,8 @@ func (s *httpServer) mountMiddlewares() {
 
 // mountRoutes Mounts routers from each app
 func (s *httpServer) mountRoutes() {
+	apiV1Router := s.router.Group("/api/v1")
 	for _, app := range s.config.Apps {
-		app.Router(s.router)
+		app.Router(apiV1Router)
 	}
 }

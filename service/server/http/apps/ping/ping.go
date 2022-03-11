@@ -14,7 +14,7 @@ func App() apps.App {
 	return &pingApp{}
 }
 
-func (a *pingApp) Router(server *gin.Engine) *gin.RouterGroup {
+func (a *pingApp) Router(server *gin.RouterGroup) *gin.RouterGroup {
 	pingRouter := server.Group("/ping")
 	{
 		pingRouter.GET("/", a.pingHandler)
