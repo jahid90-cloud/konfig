@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jahid90-cloud/konfig/service/server/http/config"
 	"github.com/jahid90-cloud/konfig/service/server/http/middlewares"
+	"github.com/jahid90-cloud/konfig/service/utils/env"
 )
 
 type httpServer struct {
@@ -11,10 +12,10 @@ type httpServer struct {
 	config *config.Config
 }
 
-func NewServer() *httpServer {
+func NewServer(env env.Env) *httpServer {
 
 	engine := gin.New()
-	config := config.NewConfig()
+	config := config.NewConfig(env)
 
 	// Remove when used behind a proxy
 	engine.SetTrustedProxies(nil)
