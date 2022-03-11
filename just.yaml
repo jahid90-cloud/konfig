@@ -1,0 +1,7 @@
+version: 6
+variables:
+commands:
+  start:server:
+    description: Start the backend server
+    steps:
+      - run: cd service && go run main.go
