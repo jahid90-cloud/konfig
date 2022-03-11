@@ -4,4 +4,4 @@ commands:
   start:server:
     description: Start the backend server
     steps:
-      - run: cd service && go run main.go
+      - run: cd service && ADDR=:8080 go run main.go
